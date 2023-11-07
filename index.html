@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>mono-cal.js</title>
+  <script src=/copyright.js></script> <meta data-hydrate data-style />
+  <style>
+    audio {
+      filter: invert(1);
+      min-height: 4em;
+    }
+    iframe {
+      width: 100%;
+      min-height: 20em;
+    }
+    img {
+      max-width: 60%;
+      flex-shrink: 1;
+      object-fit: contain;
+      object-position: left;
+    }
+  </style>
+
+  <script src="/lib/2/mono-cal/script.js"></script>
+</head>
+<body>
+
+  <div data-hydrate data-title></div>
+  <div id=root style="
+  width: -webkit-fill-available;
+  height: 50vw;
+  "></div>
+  <script>
+    mono_cal.attach(root, [
+        {
+            date: new Date(),
+            text: 'test',
+        },
+        {
+            date: datetime.offset(new Date(), duration({ w: -1 })),
+            invert: true,
+        },
+        {
+            date: datetime.offset(new Date(), duration({ w: -2 })),
+            color: '#f00',
+            text: 'click me',
+            func: () => alert('hello'),
+        },
+        {
+            date: datetime.offset(new Date(), duration({ w: -3 })),
+            img: 'https://freshman.dev/icon.png',
+        },
+        ...range(8).flatMap(w => range(7).filter(d => (w + d) % 2 === 1 ).map(d => ({
+            date: datetime.offset(new Date(), duration({ w: -4 - w, d: d })),
+            color: 'gold',
+        })))
+    ], { horizontal: true })
+  </script>
+
+</body>
+</html>
